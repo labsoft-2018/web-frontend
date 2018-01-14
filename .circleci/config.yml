@@ -33,7 +33,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - deploy:
-        command: script/deploy-prod
+          command: script/deploy-prod
 
 workflows:
   version: 2
