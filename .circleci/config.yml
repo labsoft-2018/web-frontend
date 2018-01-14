@@ -51,4 +51,4 @@ workflows:
             - test
       - deploy:
           requires:
-            - hold
+            - promote
