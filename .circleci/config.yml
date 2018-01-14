@@ -51,5 +51,5 @@ workflows:
           requires:
             - test-job
       - deploy-job:
-        requires:
-          - hold
+          requires:
+            - hold
