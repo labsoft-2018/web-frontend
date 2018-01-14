@@ -3,9 +3,10 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 defaults: &defaults
+  working_directory: ~/repo
   docker:
     - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
-  working_directory: ~/repo
+  
     
 version: 2
 jobs:
@@ -15,8 +16,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
       - run: yarn install
       - save_cache:
           paths:
@@ -25,9 +26,7 @@ jobs:
       - run: yarn build
       - persist_to_workspace: dist
   test:
-    docker:
-        - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
-    working_directory: ~/repo
+    <<: *defaults
     steps:
       - checkout
       - run: yarn install
