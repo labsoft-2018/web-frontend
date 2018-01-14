@@ -8,7 +8,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: docker pull rhinogram/node-awscli
+      - image: rhinogram/node-awscli
     steps:
       - checkout
       - restore_cache:
