@@ -1,0 +1,24 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+    
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: rhinogram/node-awscli
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: yarn test
+      - run: yarn build
+      - deploy:
+          command: "[ -z $CI_PULL_REQUEST ] && script/deploy-prod || exit 0;"
