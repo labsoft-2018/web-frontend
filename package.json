@@ -9,7 +9,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy-s3": "aws s3 sync dist s3://labsoft-webapp --profile poliworks && aws cloudfront create-invalidation --distribution-id E15SSF7A27C5IK --paths '/*'  --profile poliworks"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.9",
