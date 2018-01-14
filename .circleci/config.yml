@@ -20,3 +20,5 @@ jobs:
             - node_modules
       - run: yarn test
       - run: yarn build
+      - deploy:
+          command: script/deploy-prod

@@ -1,0 +1,4 @@
+aws --version
+aws configure set preview.cloudfront true
+aws s3 sync dist s3://labsoft-webapp
+aws cloudfront create-invalidation --distribution-id E15SSF7A27C5IK --paths '/*'
