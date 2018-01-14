@@ -1,57 +1,13 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-defaults: &defaults
-  working_directory: ~/repo
-  docker:
-    - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
-  
-    
-version: 2
+    version: 2
 jobs:
   build:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-      - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn build
-      - persist_to_workspace: 
-          root: dist
-  test:
-    <<: *defaults
+    working_directory: ~/repo
+    docker:
+      - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
     steps:
       - checkout
       - run: yarn install
       - run: yarn test
-
-  deploy:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-        at: dist
-      - run: aws s3 sync dist s3://labsoft-webapp && aws cloudfront create-invalidation --distribution-id E15SSF7A27C5IK --paths '/*'
-      
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
-      - promote:
-          type: approval
-          requires:
-            - test
+      - run: yarn build
       - deploy:
-          requires:
-            - promote
+          command: aws s3 sync dist s3://labsoft-webapp && aws cloudfront create-invalidation --distribution-id E15SSF7A27C5IK --paths '/*'
