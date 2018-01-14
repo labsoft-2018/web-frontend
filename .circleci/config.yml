@@ -2,19 +2,20 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
+defaults: &defaults
+  docker:
+    - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
+  working_directory: ~/repo
+    
 version: 2
 jobs:
   build:
-    docker:
-      - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
-    working_directory: ~/repo
-    persist_to_workspace: ~/repo
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: yarn install
       - save_cache:
@@ -22,19 +23,21 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn build
-
+      - persist_to_workspace: dist
   test:
     docker:
         - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
     working_directory: ~/repo
     steps:
+      - checkout
+      - run: yarn install
       - run: yarn test
 
   deploy:
-    docker:
-      - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
-    working_directory: ~/repo
+    <<: *defaults
     steps:
+      - attach_workspace:
+        at: dist
       - run: aws s3 sync dist s3://labsoft-webapp && aws cloudfront create-invalidation --distribution-id E15SSF7A27C5IK --paths '/*'
       
 workflows:
