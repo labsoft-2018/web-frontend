@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build-job:
+  build:
     docker:
       - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
     working_directory: ~/repo
@@ -23,7 +23,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn build
 
-  test-job:
+  test:
     docker:
         - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
     working_directory: ~/repo
@@ -31,7 +31,7 @@ jobs:
       - checkout
       - run: yarn test
 
-  deploy-job:
+  deploy:
     docker:
       - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
     working_directory: ~/repo
@@ -42,14 +42,14 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build-job
-      - test-job:
+      - build
+      - test:
           requires:
-            - build-job
-      - hold:
+            - build
+      - promote:
           type: approval
           requires:
-            - test-job
-      - deploy-job:
+            - test
+      - deploy:
           requires:
             - hold
