@@ -5,7 +5,7 @@ export default class App extends React.Component {
   public render() {
     return (
       <HelloWorld
-        name='TEST PR 3'
+        name='TEST PR 4'
       />
     )
   }
