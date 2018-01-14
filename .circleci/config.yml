@@ -8,7 +8,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
+      - image: docker pull rhinogram/node-awscli
     steps:
       - checkout
       - restore_cache:
