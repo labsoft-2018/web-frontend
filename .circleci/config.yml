@@ -42,6 +42,9 @@ workflows:
     jobs:
       - build
       - promote:
+          filters:
+                branches:
+                  only: master
           type: approval
           requires:
             - build
