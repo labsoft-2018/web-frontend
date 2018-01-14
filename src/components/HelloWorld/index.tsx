@@ -8,6 +8,6 @@ export const HelloWorld: React.SFC<IHelloWorldProps> = ({
   name,
 }) => (
   <h1>
-    Hello, {name}!
+    Hello! {name}!
   </h1>
 )

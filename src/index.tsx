@@ -1,9 +1,25 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 
-import { HelloWorld } from './components/HelloWorld';
+import App from './components/App';
 
 ReactDOM.render(
-    <HelloWorld name='Rafael' />,
-    document.getElementById('app'),
+  <AppContainer>
+    <App />
+  </AppContainer>,
+  document.getElementById('app'),
 );
+
+// Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./components/App', () => {
+    const NextApp = require('./components/App').default;
+    ReactDOM.render(
+      <AppContainer>
+        <NextApp />
+      </AppContainer>,
+      document.getElementById('app'),
+    );
+  });
+}
