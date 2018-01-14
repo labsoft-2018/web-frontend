@@ -21,4 +21,4 @@ jobs:
       - run: yarn test
       - run: yarn build
       - deploy:
-          command: "[ -z $CI_PULL_REQUEST ] && script/deploy || exit 0;"
+          command: "[ -z $CI_PULL_REQUEST ] && script/deploy-prod || exit 0;"
