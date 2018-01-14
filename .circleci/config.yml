@@ -12,12 +12,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}
       - run: yarn install
       - save_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
-        paths:
-          - node_modules
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
       - run: yarn test
       - run: yarn build
       - deploy:
