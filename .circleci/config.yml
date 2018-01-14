@@ -11,9 +11,7 @@ defaults: &defaults
 version: 2
 jobs:
   build:
-    working_directory: ~/repo
-    docker:
-      - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -26,20 +24,17 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn build
-      - persist_to_workspace: dist
+      - persist_to_workspace: 
+          root: dist
   test:
-    working_directory: ~/repo
-    docker:
-      - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
+    <<: *defaults
     steps:
       - checkout
       - run: yarn install
       - run: yarn test
 
   deploy:
-    working_directory: ~/repo
-    docker:
-      - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
+    <<: *defaults
     steps:
       - attach_workspace:
         at: dist
