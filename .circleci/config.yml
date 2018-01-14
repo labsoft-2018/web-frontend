@@ -6,7 +6,7 @@ version: 2
 jobs:
   build-job:
     docker:
-      - image: circleci/node:7.10
+      - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
     working_directory: ~/repo
 
     steps:
@@ -27,7 +27,7 @@ jobs:
       - run: yarn test
   deploy-job:
     docker:
-      - image: circleci/node:7.10
+      - image: arbornetworks-docker-public-docker.bintray.io/circleci-node-aws:8.4.0
     working_directory: ~/repo
     steps:
       - run: aws s3 sync dist s3://labsoft-webapp && aws cloudfront create-invalidation --distribution-id E15SSF7A27C5IK --paths '/*'
