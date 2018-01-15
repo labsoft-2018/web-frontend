@@ -10,12 +10,12 @@
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "lint": "tslint --project ./tsconfig.json --config ./tslint.json",
     "deploy-s3": "aws configure set preview.cloudfront true --profile=poliworks && aws s3 sync dist s3://labsoft-webapp --profile=poliworks && aws cloudfront create-invalidation --distribution-id E15SSF7A27C5IK --paths '/*' --profile=poliworks"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.9",
     "@storybook/addon-links": "^3.3.9",
-    "@storybook/react": "^3.3.9",
     "@types/jest": "^22.0.1",
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
@@ -25,7 +25,6 @@
     "compression-webpack-plugin": "^1.1.3",
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.0.6",
-    "react-hot-loader": "^4.0.0-beta.14",
     "source-map-loader": "^0.2.3",
     "ts-jest": "^22.0.1",
     "tslint": "^5.9.1",
@@ -38,10 +37,12 @@
     "webpack-visualizer-plugin": "^0.1.11"
   },
   "dependencies": {
+    "@storybook/react": "^3.3.9",
     "@types/react-test-renderer": "^16.0.0",
     "babel-polyfill": "^6.26.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-hot-loader": "^4.0.0-beta.14",
     "react-test-renderer": "^16.2.0"
   },
   "jest": {
