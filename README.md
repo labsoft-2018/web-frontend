@@ -1,5 +1,7 @@
 # Web Frontend
 
+[![CircleCI](https://circleci.com/gh/labsoft-2018/web-frontend/tree/master.svg?style=svg)](https://circleci.com/gh/labsoft-2018/web-frontend/tree/master)
+
 ## Running tests (snapshot & unit)
 ```
 yarn run test
