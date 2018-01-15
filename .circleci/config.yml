@@ -49,24 +49,22 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - promote:
-          filters:
-            branches:
-              only:
-                - master
-                - staging
-          type: approval
+      - deploy-staging:
           requires:
             - build
+          filters:
+            branches:
+              only: master
+      - promote:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+          type: approval
       - deploy:
           requires:
             - promote
           filters:
             branches:
               only: master
-      - deploy-staging:
-          requires:
-            - promote
-          filters:
-            branches:
-              only: staging
