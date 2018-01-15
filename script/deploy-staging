@@ -1,4 +1,4 @@
 aws --version
-aws configure set preview.cloudfront true
-aws s3 sync dist s3://labsoft-webapp-staging
-aws cloudfront create-invalidation --distribution-id EZI0XXQMQHOHA --paths '/*'
+aws configure set preview.cloudfront true --profile kinobot
+aws s3 sync dist s3://labsoft-webapp-staging --profile kinobot
+# aws cloudfront create-invalidation --distribution-id EZI0XXQMQHOHA --paths '/*' --profile kinobot

@@ -36,6 +36,13 @@ jobs:
           at: ~/repo
       - deploy:
           command: script/deploy-prod
+  deploy-staging:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - deploy:
+          command: script/deploy-staging
 
 workflows:
   version: 2
@@ -45,7 +52,9 @@ workflows:
       - promote:
           filters:
             branches:
-              only: master
+              only:
+                - master
+                - staging
           type: approval
           requires:
             - build
@@ -55,3 +64,9 @@ workflows:
           filters:
             branches:
               only: master
+      - deploy-staging:
+          requires:
+            - promote
+          filters:
+            branches:
+              only: staging
