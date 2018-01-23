@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { HelloWorld } from '../HelloWorld/index';
 import { SignInForm } from '../../modules/auth/components/SignInForm/index';
 
 export default class App extends React.Component {

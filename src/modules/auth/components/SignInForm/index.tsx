@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components'
-import { Button, Checkbox, Form, Input } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 import { Form as RFForm, Field as RFField } from 'react-final-form'
 import { TextInput } from '../../../widgets/components/TextInput/index'
 
