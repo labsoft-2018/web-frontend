@@ -7,10 +7,14 @@ import { TextInput } from '../../../widgets/components/TextInput/index'
 const LOGO_URL: string = 'https://i.pinimg.com/originals/06/68/99/066899986813f160faf1a641c4b429a1.png'
 
 export interface ISignInFormProps {
-  onSubmit: (values: any) => void;
-  validate: (values: any) => object | null;
+  merchantSignInWithEmail: (values: any) => void;
+  validate: (values: ISignInFormValuesProps) => object | null;
 }
 
+export interface ISignInFormValuesProps {
+  email: string;
+  password: string;
+}
 const Wrapper = styled.div`
   max-width: 400px;
   margin: auto;
@@ -29,17 +33,17 @@ const LogoName = styled.h1`
   margin-bottom: 40px;
 `
 
-export const SignInForm: React.SFC<ISignInFormProps> = ({
-  onSubmit,
+const SignInForm: React.SFC<ISignInFormProps> = ({
+  merchantSignInWithEmail,
   validate,
 }) => (
   <Wrapper>
     <Logo src={LOGO_URL} alt='Logo' />
     <LogoName>
-      Quack Pack
+      Quack Pack!!!
     </LogoName>
     <RFForm
-      onSubmit={onSubmit}
+      onSubmit={merchantSignInWithEmail}
       validate={validate}
       render={({ handleSubmit, pristine, invalid }) => (
         <Form onSubmit={handleSubmit}>
@@ -63,3 +67,5 @@ export const SignInForm: React.SFC<ISignInFormProps> = ({
   </Wrapper>
 
 )
+
+export default SignInForm
