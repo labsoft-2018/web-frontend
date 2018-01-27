@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const Merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.config')
+const { CheckerPlugin } = require('awesome-typescript-loader')
+var HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
 // const Dashboard = require('webpack-dashboard');
 
@@ -26,13 +28,14 @@ module.exports = Merge(commonConfig, {
   devServer: {
     open: true,
     hot: true,
-    quiet: true,
     contentBase: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     port: 3333,
     historyApiFallback: true
   },
   plugins: [
+    new HardSourceWebpackPlugin(),
+    new CheckerPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
