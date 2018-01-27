@@ -23,15 +23,3 @@ export default class App extends React.Component<IAppProps> {
     )
   }
 }
-
-// onSubmit={(values) => alert(JSON.stringify(values))}
-//           validate={(values) => {
-//             const errors: any = {}
-//             if (!values.email) {
-//               errors.email = 'E-mail is required'
-//             }
-//             if (!values.password) {
-//               errors.password = 'Password is required'
-//             }
-//             return errors
-//           }}
