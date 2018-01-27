@@ -2,7 +2,6 @@ import * as React from 'react'
 import PositionMap from '../../components/PositionMap'
 import { withGoogleMap, withScriptjs } from 'react-google-maps';
 import { withSocket } from '../../../socket/hocs/with-socket';
-import * as SocketIOClient from 'socket.io-client'
 import { range } from 'lodash'
 
 export interface IPosData {
