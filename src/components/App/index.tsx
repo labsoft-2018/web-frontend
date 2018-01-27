@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ApolloProvider } from 'react-apollo'
-import SignIn from '../../modules/auth/containers/SignIn'
 import SocketProvider from '../../modules/socket/providers/socket-provider';
+import Routes from '../../routes/Routes';
 
 export interface IAppProps {
   apolloClient: any,
@@ -16,7 +16,7 @@ export default class App extends React.Component<IAppProps> {
     return (
       <ApolloProvider client={apolloClient}>
         <SocketProvider socket={socketClient}>
-          <SignIn />
+          <Routes />
         </SocketProvider>
       </ApolloProvider>
 
