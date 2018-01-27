@@ -11,6 +11,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "lint": "tslint --project ./tsconfig.json --config ./tslint.json",
+    "lint-fix": "tslint --fix --project ./tsconfig.json --config ./tslint.json",
     "deploy-s3": "aws configure set preview.cloudfront true --profile=poliworks && aws s3 sync dist s3://labsoft-webapp --profile=poliworks && aws cloudfront create-invalidation --distribution-id E15SSF7A27C5IK --paths '/*' --profile=poliworks"
   },
   "devDependencies": {
