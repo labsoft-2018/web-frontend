@@ -44,6 +44,7 @@ jobs:
       - deploy:
           command: script/deploy-staging
   vsts-push:
+    <<: *defaults
     steps:
       - checkout
       - run: ssh-keyscan vs-ssh.visualstudio.com >> ~/.ssh/known_hosts
