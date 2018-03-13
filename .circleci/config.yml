@@ -46,7 +46,9 @@ jobs:
   vsts-push:
     <<: *defaults
     steps:
-      - add_ssh_keys
+      - add_ssh_keys:
+        fingerprints:
+          - "96:1c:23:2a:b7:43:26:9d:fe:dc:7f:b7:fb:61:e9:2c"
       - checkout
       - run: ssh-keyscan vs-ssh.visualstudio.com >> ~/.ssh/known_hosts
       - run: git push ssh://2018-PCS2044-LAMBDA@vs-ssh.visualstudio.com:22/quack-pack/_ssh/web-frontend master
